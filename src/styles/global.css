@@ -56,6 +56,10 @@ body {
   color: hsl(var(--text-primary));
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 * { box-sizing: border-box; }
 
 a { color: hsl(var(--accent-primary)); text-decoration: none; }
@@ -93,9 +97,17 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .card {
     transition: none;
   }
+}
+
+.prose :is(h2, h3, h4) {
+  scroll-margin-top: 5.5rem;
 }
 
 .prose blockquote p:first-child::first-letter {

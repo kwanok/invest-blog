@@ -1,8 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type ThemeMode = 'auto' | 'light' | 'dark';
 
 const STORAGE_KEY = 'theme-mode';
+const MODES: ThemeMode[] = ['auto', 'light', 'dark'];
+
+const modeLabels: Record<ThemeMode, string> = {
+  auto: '🖥️ Auto',
+  light: '☀️ Light',
+  dark: '🌙 Dark',
+};
 
 function resolveDark(mode: ThemeMode): boolean {
   if (mode === 'dark') return true;
@@ -13,15 +20,10 @@ function resolveDark(mode: ThemeMode): boolean {
 export default function ThemeToggle({ label }: { label: string }) {
   const [mode, setMode] = useState<ThemeMode>('auto');
 
-  const uiLabel = useMemo(
-    () => ({ auto: '🖥️ Auto', light: '☀️ Light', dark: '🌙 Dark' }[mode]),
-    [mode],
-  );
-
   useEffect(() => {
     const root = document.documentElement;
     const stored = (localStorage.getItem(STORAGE_KEY) as ThemeMode | null) ?? 'auto';
-    const currentMode: ThemeMode = ['auto', 'light', 'dark'].includes(stored) ? stored : 'auto';
+    const currentMode: ThemeMode = MODES.includes(stored) ? stored : 'auto';
 
     const apply = (nextMode: ThemeMode) => {
       root.classList.toggle('dark', resolveDark(nextMode));
@@ -42,22 +44,36 @@ export default function ThemeToggle({ label }: { label: string }) {
     return () => media.removeEventListener('change', onChange);
   }, []);
 
-  const onCycle = () => {
-    const nextMode: ThemeMode = mode === 'auto' ? 'light' : mode === 'light' ? 'dark' : 'auto';
+  const onSelect = (nextMode: ThemeMode) => {
     localStorage.setItem(STORAGE_KEY, nextMode);
     document.documentElement.classList.toggle('dark', resolveDark(nextMode));
     setMode(nextMode);
   };
 
   return (
-    <button
-      type="button"
+    <div
+      role="group"
       aria-label={label}
-      title={uiLabel}
-      onClick={onCycle}
-      className="card px-3 py-2 text-sm text-[hsl(var(--text))] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(var(--accent))]"
+      className="card inline-flex items-center gap-1 p-1"
     >
-      {uiLabel}
-    </button>
+      {MODES.map((item) => {
+        const selected = item === mode;
+        return (
+          <button
+            key={item}
+            type="button"
+            aria-pressed={selected}
+            onClick={() => onSelect(item)}
+            className={`rounded-lg px-2.5 py-1.5 text-xs transition ${
+              selected
+                ? 'bg-[hsl(var(--accent-soft))] font-semibold text-[hsl(var(--text-primary))]'
+                : 'text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]'
+            }`}
+          >
+            {modeLabels[item]}
+          </button>
+        );
+      })}
+    </div>
   );
 }
