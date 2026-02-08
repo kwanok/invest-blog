@@ -2,6 +2,7 @@
 import { render, getCollection } from 'astro:content';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import ReadingProgress from '../../../components/react/ReadingProgress';
+import TocSpy from '../../../components/react/TocSpy';
 import type { Lang } from '../../../consts';
 
 export async function getStaticPaths() {
@@ -35,19 +36,7 @@ const tocHeadings = headings.filter((heading) => heading.depth <= 3);
         <aside class="card hidden p-4 lg:sticky lg:top-20 lg:block" aria-label={lang === 'ko' ? '문서 목차' : 'Table of contents'}>
           <p class="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">Contents</p>
           <nav>
-            <ul class="space-y-2">
-              {tocHeadings.map((heading) => (
-                <li>
-                  <a
-                    href={`#${heading.slug}`}
-                    class="block text-sm text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]"
-                    style={`padding-left: ${(heading.depth - 2) * 0.65}rem`}
-                  >
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <TocSpy client:load headings={tocHeadings} />
           </nav>
         </aside>
       )

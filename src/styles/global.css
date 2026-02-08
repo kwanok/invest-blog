@@ -13,6 +13,9 @@
   --accent-primary: 224 72% 52%;
   --accent-primary-hover: 224 72% 45%;
   --accent-soft: 224 90% 96%;
+  --state-positive: 148 58% 36%;
+  --state-negative: 4 72% 46%;
+  --state-warning: 35 84% 42%;
   --focus-ring: 212 100% 45%;
 
   /* Backward-compatible aliases */
@@ -36,6 +39,9 @@
   --accent-primary: 218 70% 64%;
   --accent-primary-hover: 218 70% 71%;
   --accent-soft: 218 28% 24%;
+  --state-positive: 145 56% 62%;
+  --state-negative: 4 78% 68%;
+  --state-warning: 40 88% 68%;
   --focus-ring: 205 100% 65%;
 }
 

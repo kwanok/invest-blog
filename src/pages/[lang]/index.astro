@@ -19,8 +19,10 @@ const posts = (await getPostsByLang(lang)).slice(0, 3);
       <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[hsl(var(--text-muted))]">Research Briefing</p>
       <h1 class="mb-2 mt-2 text-3xl font-bold tracking-tight md:text-4xl">{copy.homeTitle}</h1>
       <p class="text-[hsl(var(--text-muted))]">{copy.homeSubtitle}</p>
-      <div class="mt-4 flex items-center gap-3">
+      <div class="mt-4 flex flex-wrap items-center gap-2">
         <span class="rounded-full border border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-elevated))] px-3 py-1 text-xs font-medium text-[hsl(var(--text-secondary))]">Cloudflare Pages Ready</span>
+        <span class="rounded-full border border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-elevated))] px-3 py-1 text-xs font-medium text-[hsl(var(--state-positive))]">Risk: Controlled</span>
+        <span class="rounded-full border border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-elevated))] px-3 py-1 text-xs font-medium text-[hsl(var(--text-secondary))]">Latency Focused</span>
         <a class="inline-block text-sm font-semibold" href={`/${lang}/blog/`}>{copy.browse} →</a>
       </div>
     </div>
