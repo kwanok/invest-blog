@@ -1,0 +1,35 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import ThemeToggle from '../components/react/ThemeToggle';
+import type { Lang } from '../consts';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const otherLang = lang === 'ko' ? 'en' : 'ko';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <header class="border-b border-[hsl(var(--border))] bg-[hsl(var(--surface))]">
+      <div class="container flex items-center justify-between py-4">
+        <a href={`/${lang}/`} class="font-semibold text-[hsl(var(--text))]">Modern Investment Blog</a>
+        <div class="flex items-center gap-2">
+          <a class="card px-3 py-2 text-sm text-[hsl(var(--text))]" href={`/${otherLang}/`}>{otherLang.toUpperCase()}</a>
+          <ThemeToggle client:load label={lang === 'ko' ? '다크 모드 전환' : 'Toggle dark mode'} />
+        </div>
+      </div>
+    </header>
+    <main class="container py-8">
+      <slot />
+    </main>
+  </body>
+</html>

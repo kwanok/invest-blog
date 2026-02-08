@@ -1,0 +1,39 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import MotionCard from '../../components/react/MotionCard';
+import { COPY, SITE_DESCRIPTION, type Lang } from '../../consts';
+import { getPostsByLang } from '../../lib/blog';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'ko' } }, { params: { lang: 'en' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+const copy = COPY[lang];
+const posts = (await getPostsByLang(lang)).slice(0, 3);
+---
+
+<SiteLayout lang={lang} title={copy.homeTitle} description={SITE_DESCRIPTION}>
+  <section class="grid gap-4 md:grid-cols-3 auto-rows-[180px]">
+    <div class="card p-6 md:col-span-2">
+      <h1 class="mb-2 text-3xl font-bold">{copy.homeTitle}</h1>
+      <p class="text-[hsl(var(--text-muted))]">{copy.homeSubtitle}</p>
+      <a class="mt-4 inline-block text-sm font-semibold" href={`/${lang}/blog/`}>{copy.browse} →</a>
+    </div>
+    <div class="card p-6">
+      <p class="text-sm text-[hsl(var(--text-muted))]">{copy.latestPosts}</p>
+      <p class="mt-2 text-2xl font-bold">{posts.length}</p>
+    </div>
+    {
+      posts.map((post) => (
+        <MotionCard client:visible>
+          <a href={`/${lang}/blog/${post.id.split('/').slice(1).join('/')}/`} class="card block h-full p-5">
+            <p class="text-xs text-[hsl(var(--text-muted))]">{post.data.pubDate.toLocaleDateString(lang)}</p>
+            <h2 class="mt-2 text-lg font-semibold text-[hsl(var(--text))]">{post.data.title}</h2>
+            <p class="mt-2 text-sm text-[hsl(var(--text-muted))]">{post.data.description}</p>
+          </a>
+        </MotionCard>
+      ))
+    }
+  </section>
+</SiteLayout>

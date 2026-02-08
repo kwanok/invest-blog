@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { type Lang } from '../../../consts';
+import { getPostsByLang } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'ko' } }, { params: { lang: 'en' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+const posts = await getPostsByLang(lang);
+---
+
+<SiteLayout lang={lang} title="Blog" description="Investment blog posts">
+  <h1 class="mb-6 text-3xl font-bold">Blog</h1>
+  <ul class="grid gap-4 md:grid-cols-2">
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/${lang}/blog/${post.id.split('/').slice(1).join('/')}/`} class="card block p-5 transition hover:-translate-y-0.5">
+            <p class="text-xs text-[hsl(var(--text-muted))]">{post.data.pubDate.toLocaleDateString(lang)}</p>
+            <h2 class="mt-2 text-xl font-semibold text-[hsl(var(--text))]">{post.data.title}</h2>
+            <p class="mt-2 text-sm text-[hsl(var(--text-muted))]">{post.data.description}</p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</SiteLayout>
