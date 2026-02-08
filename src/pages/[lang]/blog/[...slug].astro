@@ -1,6 +1,7 @@
 ---
 import { render, getCollection } from 'astro:content';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import ReadingProgress from '../../../components/react/ReadingProgress';
 import type { Lang } from '../../../consts';
 
 export async function getStaticPaths() {
@@ -20,8 +21,9 @@ const { Content } = await render(post);
 ---
 
 <SiteLayout lang={lang} title={post.data.title} description={post.data.description}>
-  <article class="prose prose-neutral max-w-none dark:prose-invert">
-    <p class="text-sm text-[hsl(var(--text-muted))]">{post.data.pubDate.toLocaleDateString(lang)}</p>
+  <ReadingProgress client:load />
+  <article class="prose prose-neutral max-w-[72ch] dark:prose-invert">
+    <p class="text-sm text-[hsl(var(--text-muted))] tabular-nums">{post.data.pubDate.toLocaleDateString(lang)}</p>
     <h1 class="text-4xl font-bold">{post.data.title}</h1>
     <Content />
   </article>
