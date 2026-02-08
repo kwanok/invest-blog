@@ -1,0 +1,37 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  trend?: 'up' | 'down' | 'flat';
+}
+
+const { label, value, trend = 'flat' } = Astro.props;
+
+const trendMap = {
+  up: {
+    icon: '▲',
+    color: 'hsl(var(--state-positive))',
+    text: 'up',
+  },
+  down: {
+    icon: '▼',
+    color: 'hsl(var(--state-negative))',
+    text: 'down',
+  },
+  flat: {
+    icon: '■',
+    color: 'hsl(var(--text-muted))',
+    text: 'flat',
+  },
+} as const;
+
+const selected = trendMap[trend];
+---
+
+<div class="inline-flex min-w-32 items-center justify-between gap-3 rounded-xl border border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-elevated))] px-3 py-2" aria-label={`${label}: ${value}, trend ${selected.text}`}>
+  <div>
+    <p class="text-[11px] uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">{label}</p>
+    <p class="mt-1 text-sm font-semibold tabular-nums text-[hsl(var(--text-primary))]">{value}</p>
+  </div>
+  <span aria-hidden="true" class="text-xs" style={`color:${selected.color}`}>{selected.icon}</span>
+</div>

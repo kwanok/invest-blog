@@ -57,12 +57,12 @@ export default function TocSpy({ headings }: { headings: Heading[] }) {
             <a
               href={`#${heading.slug}`}
               aria-current={isActive ? 'location' : undefined}
-              className={`block text-sm transition ${
+              className={`block rounded-md border-l-2 py-1 text-sm transition ${
                 isActive
-                  ? 'font-semibold text-[hsl(var(--text-primary))]'
-                  : 'text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]'
+                  ? 'border-[hsl(var(--accent-primary))] bg-[hsl(var(--accent-soft))] font-semibold text-[hsl(var(--text-primary))]'
+                  : 'border-transparent text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]'
               }`}
-              style={{ paddingLeft: `${(heading.depth - 2) * 0.65}rem` }}
+              style={{ paddingLeft: `calc(${(heading.depth - 2) * 0.65}rem + 0.45rem)` }}
             >
               {heading.text}
             </a>
