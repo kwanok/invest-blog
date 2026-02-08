@@ -32,14 +32,15 @@ export default function ThemeToggle({ label }: { label: string }) {
 
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const onChange = () => {
-      if (mode === 'auto') {
+      const latestMode = (localStorage.getItem(STORAGE_KEY) as ThemeMode | null) ?? 'auto';
+      if (latestMode === 'auto') {
         root.classList.toggle('dark', media.matches);
       }
     };
 
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
-  }, [mode]);
+  }, []);
 
   const onCycle = () => {
     const nextMode: ThemeMode = mode === 'auto' ? 'light' : mode === 'light' ? 'dark' : 'auto';
