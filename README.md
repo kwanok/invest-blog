@@ -34,6 +34,8 @@ Posts are in `src/content/blog/{lang}/`.
 ## Deploy to GitHub Pages
 
 1. Push this repository to GitHub.
+   - CLI 인증이 필요하면 `INVEST_BLOG_GH_TOKEN` 환경변수 사용:
+     `echo "$INVEST_BLOG_GH_TOKEN" | gh auth login --with-token`
 2. In repo settings, enable **Pages** source as **GitHub Actions**.
 3. (Optional) set repository variables if needed:
    - `SITE_URL` (e.g. `https://<user>.github.io`)
