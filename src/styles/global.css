@@ -1,23 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --bg: 240 18% 97%;
-  --surface: 240 12% 99%;
-  --surface-muted: 240 10% 95%;
-  --text: 230 26% 15%;
+  /* Semantic tokens (Plan v2 foundation) */
+  --bg-canvas: 240 18% 97%;
+  --bg-surface: 240 12% 99%;
+  --bg-elevated: 240 10% 95%;
+  --text-primary: 230 26% 15%;
+  --text-secondary: 228 12% 30%;
   --text-muted: 228 12% 40%;
-  --border: 230 16% 82%;
-  --accent: 224 72% 52%;
+  --border-subtle: 230 16% 82%;
+  --border-strong: 230 16% 70%;
+  --accent-primary: 224 72% 52%;
+  --accent-primary-hover: 224 72% 45%;
+  --accent-soft: 224 90% 96%;
+  --focus-ring: 212 100% 45%;
+
+  /* Backward-compatible aliases */
+  --bg: var(--bg-canvas);
+  --surface: var(--bg-surface);
+  --surface-muted: var(--bg-elevated);
+  --text: var(--text-primary);
+  --border: var(--border-subtle);
+  --accent: var(--accent-primary);
 }
 
 :root.dark {
-  --bg: 228 22% 10%;
-  --surface: 228 21% 14%;
-  --surface-muted: 228 18% 18%;
-  --text: 220 18% 92%;
+  --bg-canvas: 228 22% 10%;
+  --bg-surface: 228 21% 14%;
+  --bg-elevated: 228 18% 18%;
+  --text-primary: 220 18% 92%;
+  --text-secondary: 220 12% 84%;
   --text-muted: 220 10% 72%;
-  --border: 227 10% 30%;
-  --accent: 218 70% 64%;
+  --border-subtle: 227 10% 30%;
+  --border-strong: 227 10% 44%;
+  --accent-primary: 218 70% 64%;
+  --accent-primary-hover: 218 70% 71%;
+  --accent-soft: 218 28% 24%;
+  --focus-ring: 205 100% 65%;
 }
 
 html,
@@ -25,14 +44,22 @@ body {
   margin: 0;
   padding: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  background: hsl(var(--bg));
-  color: hsl(var(--text));
+  background:
+    radial-gradient(1200px 400px at 10% -10%, hsl(var(--accent-soft) / 0.65), transparent 70%),
+    hsl(var(--bg-canvas));
+  color: hsl(var(--text-primary));
 }
 
 * { box-sizing: border-box; }
 
-a { color: hsl(var(--accent)); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: hsl(var(--accent-primary)); text-decoration: none; }
+a:hover { color: hsl(var(--accent-primary-hover)); text-decoration: underline; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid hsl(var(--focus-ring));
+  outline-offset: 2px;
+}
 
 .container {
   width: min(1100px, calc(100% - 2rem));
@@ -40,17 +67,29 @@ a:hover { text-decoration: underline; }
 }
 
 .card {
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--border-subtle));
   border-radius: 1rem;
-  background: hsl(var(--surface));
+  background: hsl(var(--bg-surface));
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.card:hover {
+  border-color: hsl(var(--border-strong));
+  box-shadow: 0 12px 26px hsl(230 35% 18% / 0.08);
 }
 
 .prose blockquote {
-  border-left: 3px solid hsl(var(--accent));
-  background: hsl(var(--surface-muted));
+  border-left: 3px solid hsl(var(--accent-primary));
+  background: hsl(var(--bg-elevated));
   border-radius: 0.75rem;
   padding: 0.9rem 1rem;
   font-style: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
 }
 
 .prose blockquote p:first-child::first-letter {
