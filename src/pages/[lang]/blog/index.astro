@@ -49,12 +49,24 @@ const labels = {
 </SiteLayout>
 
 <script>
-  const allButtons = Array.from(document.querySelectorAll('.filter-btn'));
-  const postItems = Array.from(document.querySelectorAll('[data-post-item]'));
+  const allButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+  const postItems = Array.from(document.querySelectorAll<HTMLElement>('[data-post-item]'));
   const emptyState = document.getElementById('empty-state');
   const now = Date.now();
 
-  const applyFilter = (filter: 'all' | 'recent') => {
+  const getFilterFromURL = () => (new URLSearchParams(window.location.search).get('filter') === 'recent' ? 'recent' : 'all');
+
+  const updateURL = (filter: 'all' | 'recent') => {
+    const url = new URL(window.location.href);
+    if (filter === 'recent') {
+      url.searchParams.set('filter', 'recent');
+    } else {
+      url.searchParams.delete('filter');
+    }
+    history.replaceState(null, '', url);
+  };
+
+  const applyFilter = (filter: 'all' | 'recent', options?: { syncURL?: boolean }) => {
     let visibleCount = 0;
 
     postItems.forEach((item) => {
@@ -74,16 +86,33 @@ const labels = {
       const selected = button.getAttribute('data-filter') === filter;
       button.setAttribute('aria-pressed', selected ? 'true' : 'false');
       button.setAttribute('data-active', selected ? 'true' : 'false');
+      if (selected) button.focus({ preventScroll: true });
     });
+
+    if (options?.syncURL !== false) {
+      updateURL(filter);
+    }
   };
 
-  allButtons.forEach((button) => {
+  allButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
       const rawFilter = button.getAttribute('data-filter');
       const filter = rawFilter === 'recent' ? 'recent' : 'all';
       applyFilter(filter);
     });
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      const nextIndex = event.key === 'ArrowRight'
+        ? (index + 1) % allButtons.length
+        : (index - 1 + allButtons.length) % allButtons.length;
+      const nextButton = allButtons[nextIndex];
+      const rawFilter = nextButton.getAttribute('data-filter');
+      const filter = rawFilter === 'recent' ? 'recent' : 'all';
+      applyFilter(filter);
+    });
   });
 
-  applyFilter('all');
+  applyFilter(getFilterFromURL(), { syncURL: false });
 </script>

@@ -92,6 +92,20 @@ button:focus-visible {
   margin-inline: auto;
 }
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(10px);
+  background: hsl(var(--bg-surface) / 0.9);
+}
+
+.section-rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--border-strong)) 25%, hsl(var(--border-subtle)) 75%, transparent 100%);
+}
+
 .card {
   border: 1px solid hsl(var(--border-subtle));
   border-radius: 1rem;
