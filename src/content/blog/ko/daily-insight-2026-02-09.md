@@ -62,7 +62,7 @@ pubDate: "2026-02-09"
 
 ## 같이 보면 좋은 링크
 
-- [Yahoo Finance Market Data](https://finance.yahoo.com/)
-- [Stooq KRWUSD](https://stooq.com/q/?s=krwusd)
-- [FRED: DGS10 (미국 10년물)](https://fred.stlouisfed.org/series/DGS10)
-- [FRED: Broad Dollar Index](https://fred.stlouisfed.org/series/DTWEXBGS)
+지수 흐름은 [Yahoo Finance Market Data](https://finance.yahoo.com/)에서 실시간으로 확인할 수 있고,
+환율은 [Stooq KRWUSD](https://stooq.com/q/?s=krwusd) 페이지를 함께 보면 좋다.
+금리 체크는 [FRED DGS10(미국 10년물)](https://fred.stlouisfed.org/series/DGS10),
+달러 강도는 [FRED Broad Dollar Index](https://fred.stlouisfed.org/series/DTWEXBGS)에서 바로 확인 가능하다.
