@@ -20,6 +20,7 @@ const copy = COPY[lang];
     <BaseHead title={title} description={description} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">{copy.skipToContent}</a>
     <header class="border-b border-[hsl(var(--border))] bg-[hsl(var(--surface))]">
       <div class="container flex items-center justify-between py-4">
         <div class="flex items-center gap-6">
@@ -36,16 +37,16 @@ const copy = COPY[lang];
         </div>
       </div>
     </header>
-    <main class="container py-8">
+    <main id="main-content" class="container py-8">
       <slot />
     </main>
     <footer class="mt-8 border-t border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-surface))]">
       <div class="container flex flex-col gap-3 py-6 text-sm text-[hsl(var(--text-secondary))] md:flex-row md:items-center md:justify-between">
         <p class="text-xs text-[hsl(var(--text-muted))]">{copy.footerNote}</p>
         <nav aria-label={lang === 'ko' ? '하단 링크' : 'Footer links'} class="flex items-center gap-4">
-          <a href="#" class="hover:underline">{copy.methodology}</a>
-          <a href="#" class="hover:underline">{copy.legal}</a>
-          <a href="#" class="hover:underline">{copy.contact}</a>
+          <a href={`/${lang}/#methodology`} class="hover:underline">{copy.methodology}</a>
+          <a href={`/${lang}/#legal`} class="hover:underline">{copy.legal}</a>
+          <a href={`/${lang}/#contact`} class="hover:underline">{copy.contact}</a>
         </nav>
       </div>
     </footer>
