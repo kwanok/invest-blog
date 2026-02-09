@@ -22,17 +22,17 @@ const copy = COPY[lang];
   <body>
     <a href="#main-content" class="skip-link">{copy.skipToContent}</a>
     <header class="site-header border-b border-[hsl(var(--border))] bg-[hsl(var(--surface))]">
-      <div class="container flex items-center justify-between py-4">
-        <div class="flex items-center gap-6">
-          <a href={`/${lang}/`} class="font-semibold text-[hsl(var(--text))]">Modern Investment Blog</a>
+      <div class="container flex flex-wrap items-center justify-between gap-2 py-3 md:py-4">
+        <div class="flex min-w-0 items-center gap-3 md:gap-6">
+          <a href={`/${lang}/`} class="truncate text-sm font-semibold text-[hsl(var(--text))] md:text-base">Modern Investment Blog</a>
           <nav aria-label={lang === 'ko' ? '주요 메뉴' : 'Primary'} class="hidden md:block">
             <a class="text-sm font-medium text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]" href={`/${lang}/blog/`}>
               {lang === 'ko' ? '인사이트' : 'Insights'}
             </a>
           </nav>
         </div>
-        <div class="flex items-center gap-2">
-          <a class="card px-3 py-2 text-sm text-[hsl(var(--text))]" href={`/${otherLang}/`}>{otherLang.toUpperCase()}</a>
+        <div class="ml-auto flex items-center gap-2">
+          <a class="card px-2.5 py-2 text-xs text-[hsl(var(--text))] md:px-3 md:text-sm" href={`/${otherLang}/`}>{otherLang.toUpperCase()}</a>
           <ThemeToggle client:load label={copy.toggleTheme} />
         </div>
       </div>

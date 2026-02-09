@@ -15,7 +15,7 @@ const posts = (await getPostsByLang(lang)).slice(0, 3);
 ---
 
 <SiteLayout lang={lang} title={copy.homeTitle} description={SITE_DESCRIPTION}>
-  <section class="grid auto-rows-[180px] gap-4 md:grid-cols-3">
+  <section class="grid gap-4 md:auto-rows-[180px] md:grid-cols-3">
     <div class="card p-6 md:col-span-2">
       <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[hsl(var(--text-muted))]">Research Briefing</p>
       <h1 class="mb-2 mt-2 text-3xl font-bold tracking-tight md:text-4xl">{copy.homeTitle}</h1>

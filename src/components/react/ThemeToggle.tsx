@@ -6,9 +6,9 @@ const STORAGE_KEY = 'theme-mode';
 const MODES: ThemeMode[] = ['auto', 'light', 'dark'];
 
 const modeLabels: Record<ThemeMode, string> = {
-  auto: '🖥️ Auto',
-  light: '☀️ Light',
-  dark: '🌙 Dark',
+  auto: 'Auto',
+  light: 'Light',
+  dark: 'Dark',
 };
 
 function resolveDark(mode: ThemeMode): boolean {
@@ -50,30 +50,43 @@ export default function ThemeToggle({ label }: { label: string }) {
     setMode(nextMode);
   };
 
+  const onCycleMobile = () => {
+    const currentIndex = MODES.indexOf(mode);
+    const nextMode = MODES[(currentIndex + 1) % MODES.length];
+    onSelect(nextMode);
+  };
+
   return (
-    <div
-      role="group"
-      aria-label={label}
-      className="card inline-flex items-center gap-1 p-1"
-    >
-      {MODES.map((item) => {
-        const selected = item === mode;
-        return (
-          <button
-            key={item}
-            type="button"
-            aria-pressed={selected}
-            onClick={() => onSelect(item)}
-            className={`rounded-lg px-2.5 py-1.5 text-xs transition ${
-              selected
-                ? 'bg-[hsl(var(--accent-soft))] font-semibold text-[hsl(var(--text-primary))]'
-                : 'text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]'
-            }`}
-          >
-            {modeLabels[item]}
-          </button>
-        );
-      })}
-    </div>
+    <>
+      <button
+        type="button"
+        onClick={onCycleMobile}
+        aria-label={label}
+        className="card inline-flex items-center gap-1 px-2.5 py-2 text-xs text-[hsl(var(--text-primary))] md:hidden"
+      >
+        Theme: {modeLabels[mode]}
+      </button>
+
+      <div role="group" aria-label={label} className="card hidden items-center gap-1 p-1 md:inline-flex">
+        {MODES.map((item) => {
+          const selected = item === mode;
+          return (
+            <button
+              key={item}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => onSelect(item)}
+              className={`rounded-lg px-2.5 py-1.5 text-xs transition ${
+                selected
+                  ? 'bg-[hsl(var(--accent-soft))] font-semibold text-[hsl(var(--text-primary))]'
+                  : 'text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]'
+              }`}
+            >
+              {modeLabels[item]}
+            </button>
+          );
+        })}
+      </div>
+    </>
   );
 }
