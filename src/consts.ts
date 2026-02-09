@@ -11,6 +11,10 @@ export const COPY = {
 		latestPosts: '최신 글',
 		browse: '블로그 보기',
 		toggleTheme: '다크 모드 전환',
+		methodology: '방법론',
+		legal: '면책 고지',
+		contact: '문의',
+		footerNote: '발행 시점 기준 데이터 기반 리서치. 투자 권유 아님.',
 	},
 	en: {
 		homeTitle: 'Data-Driven Investment Insights',
@@ -18,5 +22,9 @@ export const COPY = {
 		latestPosts: 'Latest Posts',
 		browse: 'Browse blog',
 		toggleTheme: 'Toggle dark mode',
+		methodology: 'Methodology',
+		legal: 'Legal',
+		contact: 'Contact',
+		footerNote: 'Research is data-driven at publication time and not investment advice.',
 	},
 };

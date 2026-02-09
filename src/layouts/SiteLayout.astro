@@ -1,7 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import ThemeToggle from '../components/react/ThemeToggle';
-import type { Lang } from '../consts';
+import { COPY, type Lang } from '../consts';
 
 interface Props {
   lang: Lang;
@@ -11,6 +11,7 @@ interface Props {
 
 const { lang, title, description } = Astro.props;
 const otherLang = lang === 'ko' ? 'en' : 'ko';
+const copy = COPY[lang];
 ---
 
 <!doctype html>
@@ -21,15 +22,32 @@ const otherLang = lang === 'ko' ? 'en' : 'ko';
   <body>
     <header class="border-b border-[hsl(var(--border))] bg-[hsl(var(--surface))]">
       <div class="container flex items-center justify-between py-4">
-        <a href={`/${lang}/`} class="font-semibold text-[hsl(var(--text))]">Modern Investment Blog</a>
+        <div class="flex items-center gap-6">
+          <a href={`/${lang}/`} class="font-semibold text-[hsl(var(--text))]">Modern Investment Blog</a>
+          <nav aria-label={lang === 'ko' ? '주요 메뉴' : 'Primary'} class="hidden md:block">
+            <a class="text-sm font-medium text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]" href={`/${lang}/blog/`}>
+              {lang === 'ko' ? '인사이트' : 'Insights'}
+            </a>
+          </nav>
+        </div>
         <div class="flex items-center gap-2">
           <a class="card px-3 py-2 text-sm text-[hsl(var(--text))]" href={`/${otherLang}/`}>{otherLang.toUpperCase()}</a>
-          <ThemeToggle client:load label={lang === 'ko' ? '다크 모드 전환' : 'Toggle dark mode'} />
+          <ThemeToggle client:load label={copy.toggleTheme} />
         </div>
       </div>
     </header>
     <main class="container py-8">
       <slot />
     </main>
+    <footer class="mt-8 border-t border-[hsl(var(--border-subtle))] bg-[hsl(var(--bg-surface))]">
+      <div class="container flex flex-col gap-3 py-6 text-sm text-[hsl(var(--text-secondary))] md:flex-row md:items-center md:justify-between">
+        <p class="text-xs text-[hsl(var(--text-muted))]">{copy.footerNote}</p>
+        <nav aria-label={lang === 'ko' ? '하단 링크' : 'Footer links'} class="flex items-center gap-4">
+          <a href="#" class="hover:underline">{copy.methodology}</a>
+          <a href="#" class="hover:underline">{copy.legal}</a>
+          <a href="#" class="hover:underline">{copy.contact}</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>
