@@ -136,6 +136,38 @@ svg {
   box-shadow: 0 12px 26px hsl(230 35% 18% / 0.08);
 }
 
+.prose {
+  color: hsl(var(--text-primary));
+  line-height: 1.75;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  color: hsl(var(--text-primary));
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.prose h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0.5rem 0 1rem; }
+.prose h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); margin: 2rem 0 0.8rem; }
+.prose h3 { font-size: clamp(1.1rem, 2.2vw, 1.25rem); margin: 1.2rem 0 0.6rem; }
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0.7rem 0;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.1rem;
+}
+
+.prose li {
+  margin: 0.3rem 0;
+}
+
 .prose blockquote {
   border-left: 3px solid hsl(var(--accent-primary));
   background: hsl(var(--bg-elevated));
