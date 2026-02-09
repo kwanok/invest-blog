@@ -22,9 +22,9 @@ const posts = (await getPostsByLang(lang)).slice(0, 3);
       <p class="text-[hsl(var(--text-muted))]">{copy.homeSubtitle}</p>
       <div class="section-rule mt-4" aria-hidden="true"></div>
       <div class="mt-4 flex flex-wrap items-center gap-2">
-        <MetricBadge label={lang === 'ko' ? '배포' : 'Deploy'} value="Cloudflare Pages" trend="up" />
-        <MetricBadge label={lang === 'ko' ? '리스크' : 'Risk'} value={lang === 'ko' ? '통제됨' : 'Controlled'} trend="flat" />
-        <MetricBadge label={lang === 'ko' ? '응답성' : 'Latency'} value={lang === 'ko' ? '최적화 중심' : 'Optimized'} trend="up" />
+        <MetricBadge label={lang === 'ko' ? '업데이트 주기' : 'Update cadence'} value={lang === 'ko' ? '주 2-3회' : '2-3 posts/week'} trend="up" />
+        <MetricBadge label={lang === 'ko' ? '리스크 프레임' : 'Risk framework'} value={lang === 'ko' ? '시나리오 기반' : 'Scenario-based'} trend="flat" />
+        <MetricBadge label={lang === 'ko' ? '분석 범위' : 'Coverage'} value={lang === 'ko' ? '거시·크립토·심리' : 'Macro·Crypto·Sentiment'} trend="up" />
         <a class="inline-block text-sm font-semibold" href={`/${lang}/blog/`}>{copy.browse} →</a>
       </div>
     </div>

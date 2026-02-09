@@ -1,5 +1,5 @@
-export const SITE_TITLE = 'Modern Investment Blog';
-export const SITE_DESCRIPTION = 'A bilingual Astro investment blog MVP with focused insights.';
+export const SITE_TITLE = 'Arcane Markets';
+export const SITE_DESCRIPTION = 'Arcane Markets — 데이터 기반 투자 인사이트와 명확한 리스크 프레임워크를 제공하는 리서치 블로그.';
 
 export const SUPPORTED_LANGS = ['ko', 'en'] as const;
 export type Lang = (typeof SUPPORTED_LANGS)[number];
