@@ -28,6 +28,30 @@ const tocHeadings = headings.filter((heading) => heading.depth <= 3);
     <article class="prose prose-neutral max-w-[72ch] dark:prose-invert">
       <p class="text-sm text-[hsl(var(--text-muted))] tabular-nums">{post.data.pubDate.toLocaleDateString(lang)}</p>
       <h1 class="text-4xl font-bold">{post.data.title}</h1>
+
+      {
+        tocHeadings.length > 0 && (
+          <details class="card my-5 p-3 lg:hidden">
+            <summary class="cursor-pointer text-sm font-semibold text-[hsl(var(--text-primary))]">
+              {lang === 'ko' ? '목차 보기' : 'View contents'}
+            </summary>
+            <ul class="mt-3 space-y-2">
+              {tocHeadings.map((heading) => (
+                <li>
+                  <a
+                    href={`#${heading.slug}`}
+                    class="block rounded px-2 py-1 text-sm text-[hsl(var(--text-secondary))] hover:bg-[hsl(var(--accent-soft))] hover:text-[hsl(var(--text-primary))]"
+                    style={`padding-left: calc(${(heading.depth - 2) * 0.65}rem + 0.5rem)`}
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )
+      }
+
       <Content />
     </article>
 
