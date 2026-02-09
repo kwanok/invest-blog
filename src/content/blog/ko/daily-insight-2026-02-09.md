@@ -58,3 +58,11 @@ pubDate: "2026-02-09"
 - **투자 자문/매수·매도 추천이 아님**.
 - 시장 급변으로 **원금 손실 가능**.
 - 최종 투자 판단과 책임은 **투자자 본인**에게 있음.
+
+
+## 같이 보면 좋은 링크
+
+- [Yahoo Finance Market Data](https://finance.yahoo.com/)
+- [Stooq KRWUSD](https://stooq.com/q/?s=krwusd)
+- [FRED: DGS10 (미국 10년물)](https://fred.stlouisfed.org/series/DGS10)
+- [FRED: Broad Dollar Index](https://fred.stlouisfed.org/series/DTWEXBGS)
