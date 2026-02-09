@@ -9,14 +9,32 @@ export async function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 const posts = await getPostsByLang(lang);
+
+const labels = {
+  title: lang === 'ko' ? '블로그' : 'Blog',
+  all: lang === 'ko' ? '전체' : 'All',
+  recent30: lang === 'ko' ? '최근 30일' : 'Last 30 days',
+  noPosts: lang === 'ko' ? '표시할 글이 없습니다.' : 'No posts to show.',
+};
 ---
 
 <SiteLayout lang={lang} title="Blog" description="Investment blog posts">
-  <h1 class="mb-6 text-3xl font-bold">Blog</h1>
-  <ul class="grid gap-4 md:grid-cols-2">
+  <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+    <h1 class="text-3xl font-bold">{labels.title}</h1>
+    <div class="card inline-flex items-center gap-1 p-1" role="group" aria-label={lang === 'ko' ? '글 필터' : 'Post filters'}>
+      <button type="button" data-filter="all" data-active="true" aria-pressed="true" class="filter-btn rounded-lg px-3 py-1.5 text-xs">
+        {labels.all}
+      </button>
+      <button type="button" data-filter="recent" data-active="false" aria-pressed="false" class="filter-btn rounded-lg px-3 py-1.5 text-xs">
+        {labels.recent30}
+      </button>
+    </div>
+  </div>
+
+  <ul id="post-list" class="grid gap-4 md:grid-cols-2">
     {
       posts.map((post) => (
-        <li>
+        <li data-post-item data-date={post.data.pubDate.toISOString()}>
           <a href={`/${lang}/blog/${post.id.split('/').slice(1).join('/')}/`} class="card block p-5 transition hover:-translate-y-0.5">
             <p class="text-xs text-[hsl(var(--text-muted))]">{post.data.pubDate.toLocaleDateString(lang)}</p>
             <h2 class="mt-2 text-xl font-semibold text-[hsl(var(--text))]">{post.data.title}</h2>
@@ -26,4 +44,46 @@ const posts = await getPostsByLang(lang);
       ))
     }
   </ul>
+
+  <p id="empty-state" class="card mt-4 hidden p-5 text-sm text-[hsl(var(--text-secondary))]">{labels.noPosts}</p>
 </SiteLayout>
+
+<script>
+  const allButtons = Array.from(document.querySelectorAll('.filter-btn'));
+  const postItems = Array.from(document.querySelectorAll('[data-post-item]'));
+  const emptyState = document.getElementById('empty-state');
+  const now = Date.now();
+
+  const applyFilter = (filter: 'all' | 'recent') => {
+    let visibleCount = 0;
+
+    postItems.forEach((item) => {
+      const raw = item.getAttribute('data-date');
+      const postTime = raw ? new Date(raw).getTime() : 0;
+      const inRecentWindow = postTime > 0 && now - postTime <= 1000 * 60 * 60 * 24 * 30;
+      const visible = filter === 'all' || inRecentWindow;
+      item.classList.toggle('hidden', !visible);
+      if (visible) visibleCount += 1;
+    });
+
+    if (emptyState) {
+      emptyState.classList.toggle('hidden', visibleCount !== 0);
+    }
+
+    allButtons.forEach((button) => {
+      const selected = button.getAttribute('data-filter') === filter;
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      button.setAttribute('data-active', selected ? 'true' : 'false');
+    });
+  };
+
+  allButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const rawFilter = button.getAttribute('data-filter');
+      const filter = rawFilter === 'recent' ? 'recent' : 'all';
+      applyFilter(filter);
+    });
+  });
+
+  applyFilter('all');
+</script>
