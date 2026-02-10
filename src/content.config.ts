@@ -10,6 +10,10 @@ const blog = defineCollection({
 			lang: z.enum(['ko', 'en']),
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
+      postTags: z.array(z.enum(['Fact', 'View', 'Scenario'])).min(1),
+      dataAsOf: z.coerce.date().optional(),
+      sources: z.array(z.string().url()).optional(),
+      verificationStatus: z.enum(['verified', 'partial', 'unverified']).default('partial'),
 			heroImage: image().optional(),
 		}),
 });

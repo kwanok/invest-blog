@@ -3,6 +3,13 @@ title: "원달러 환율 체크포인트"
 description: "변동성 장세에서 환율을 리스크 신호로 읽는 간단한 방법"
 lang: "ko"
 pubDate: "2026-02-03"
+postTags: ['Fact','View']
+dataAsOf: "2026-02-03T09:00:00+09:00"
+verificationStatus: "partial"
+sources:
+  - "https://stooq.com/"
+  - "https://finance.yahoo.com/"
+
 ---
 
 단기 투자에서는 **방향성보다 변동성 관리**가 더 중요합니다.

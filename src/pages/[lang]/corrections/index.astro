@@ -1,0 +1,60 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import type { Lang } from '../../../consts';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'ko' } }, { params: { lang: 'en' } }];
+}
+
+const lang = Astro.params.lang as Lang;
+
+type CopyBlock = {
+  title: string;
+  policy: string;
+  contact: string;
+  columns: string[];
+  row: string[];
+};
+
+const copyMap: Record<Lang, CopyBlock> = {
+  ko: {
+    title: '정정 정책 및 정정 로그',
+    policy: '오류 제보 접수 후 24시간(SLA) 내 1차 확인 결과를 게시한다. 데이터·수치 오류는 원문에 수정 시각과 변경 내용을 남긴다.',
+    contact: '제보: hello@example.com',
+    columns: ['시각', '문서', '내용', '상태'],
+    row: ['2026-02-10 17:30 KST', 'Daily Insight (ko/en)', '출처 메타데이터 표기 방식 개선', '완료'],
+  },
+  en: {
+    title: 'Corrections Policy & Log',
+    policy: 'We publish an initial verification result within 24 hours (SLA) after receiving an error report. Numeric/data corrections include updated timestamp and change notes.',
+    contact: 'Report: hello@example.com',
+    columns: ['Time', 'Document', 'Change', 'Status'],
+    row: ['2026-02-10 17:30 KST', 'Daily Insight (ko/en)', 'Improved source metadata presentation', 'Done'],
+  },
+};
+
+const copy = copyMap[lang];
+---
+
+<SiteLayout lang={lang} title={copy.title} description={copy.policy}>
+  <section class="card p-6">
+    <h1 class="text-2xl font-bold">{copy.title}</h1>
+    <p class="mt-3 text-sm text-[hsl(var(--text-secondary))]">{copy.policy}</p>
+    <p class="mt-2 text-sm text-[hsl(var(--text-secondary))]">{copy.contact}</p>
+  </section>
+
+  <section class="card mt-4 overflow-x-auto p-6">
+    <table class="w-full min-w-[560px] text-left text-sm">
+      <thead>
+        <tr class="border-b border-[hsl(var(--border-subtle))] text-[hsl(var(--text-muted))]">
+          {copy.columns.map((col: string) => <th class="py-2 pr-3 font-medium">{col}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {copy.row.map((cell: string) => <td class="py-3 pr-3 text-[hsl(var(--text-secondary))]">{cell}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</SiteLayout>

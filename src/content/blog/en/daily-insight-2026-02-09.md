@@ -3,6 +3,13 @@ title: "Daily Insight (2026-02-09): In a Rebound Window, Risk Before Chase"
 description: "Global equities are rebounding, but event risk still argues for disciplined sizing and strict loss limits."
 lang: "en"
 pubDate: "2026-02-09"
+postTags: ['Fact','Scenario']
+dataAsOf: "2026-02-09T12:00:00+09:00"
+verificationStatus: "partial"
+sources:
+  - "https://finance.yahoo.com/"
+  - "https://stooq.com/"
+
 ---
 
 ## TL;DR

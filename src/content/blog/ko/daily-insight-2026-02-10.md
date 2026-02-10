@@ -3,6 +3,14 @@ title: "데일리 인사이트 (2026-02-10): 이벤트 해석 장세, 확률 기
 description: "중앙은행 동결 기조와 지수 반등 신호 속에서 변동성 재확대 가능성을 함께 반영한 보수적 전략"
 lang: "ko"
 pubDate: "2026-02-10"
+postTags: ['Fact','View','Scenario']
+dataAsOf: "2026-02-10T12:00:00+09:00"
+verificationStatus: "verified"
+sources:
+  - "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260209_1~f0653b48af.en.html"
+  - "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm"
+  - "https://stooq.com/q/l/?s=%5Espx&f=sd2t2ohlcv&h&e=csv"
+
 ---
 
 > ## TL;DR

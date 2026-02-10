@@ -3,6 +3,14 @@ title: "Daily Insight (2026-02-10): Event-Interpretation Market, Probability-Fir
 description: "A conservative playbook that balances rebound signals with headline-volatility risk across equities and crypto."
 lang: "en"
 pubDate: "2026-02-10"
+postTags: ['Fact','View','Scenario']
+dataAsOf: "2026-02-10T12:00:00+09:00"
+verificationStatus: "verified"
+sources:
+  - "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260209_1~f0653b48af.en.html"
+  - "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260128a.htm"
+  - "https://stooq.com/q/l/?s=%5Espx&f=sd2t2ohlcv&h&e=csv"
+
 ---
 
 ## TL;DR

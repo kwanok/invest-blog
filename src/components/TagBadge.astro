@@ -1,0 +1,14 @@
+---
+interface Props {
+  tag: 'Fact' | 'View' | 'Scenario';
+}
+
+const { tag } = Astro.props;
+const classMap = {
+  Fact: 'bg-emerald-100/70 text-emerald-900 dark:bg-emerald-900/30 dark:text-emerald-200',
+  View: 'bg-indigo-100/70 text-indigo-900 dark:bg-indigo-900/30 dark:text-indigo-200',
+  Scenario: 'bg-amber-100/80 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200',
+} as const;
+---
+
+<span class={`inline-flex rounded-full px-2 py-1 text-[11px] font-semibold tracking-wide ${classMap[tag]}`}>{tag}</span>

@@ -3,6 +3,13 @@ title: "데일리 인사이트 (2026-02-09): 반등 구간, 추격보다 리스�
 description: "글로벌 주식 동반 반등 신호 속에서도 이벤트 리스크를 감안한 보수적 운용 체크리스트"
 lang: "ko"
 pubDate: "2026-02-09"
+postTags: ['Fact','Scenario']
+dataAsOf: "2026-02-09T12:00:00+09:00"
+verificationStatus: "partial"
+sources:
+  - "https://finance.yahoo.com/"
+  - "https://stooq.com/"
+
 ---
 
 > ## TL;DR

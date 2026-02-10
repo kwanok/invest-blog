@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type Lang } from '../consts';
+
+interface Props {
+  lang: Lang;
+  post: CollectionEntry<'blog'>;
+}
+
+const { lang, post } = Astro.props;
+const data = post.data;
+
+const verificationMap = {
+  verified: lang === 'ko' ? '검증완료' : 'Verified',
+  partial: lang === 'ko' ? '부분검증' : 'Partially verified',
+  unverified: lang === 'ko' ? '미검증' : 'Unverified',
+} as const;
+---
+
+<section class="card mb-4 p-4" aria-label={lang === 'ko' ? '신뢰 메타데이터' : 'Trust metadata'}>
+  <dl class="grid gap-3 text-sm md:grid-cols-2">
+    <div>
+      <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">{lang === 'ko' ? '출처' : 'Sources'}</dt>
+      <dd class="mt-1 text-[hsl(var(--text-secondary))]">{data.sources?.length ?? 0} {lang === 'ko' ? '건' : 'items'}</dd>
+    </div>
+    <div>
+      <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">{lang === 'ko' ? '데이터 기준시각' : 'Data as of'}</dt>
+      <dd class="mt-1 text-[hsl(var(--text-secondary))]">{data.dataAsOf ? data.dataAsOf.toLocaleString(lang) : '-'}</dd>
+    </div>
+    <div>
+      <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">{lang === 'ko' ? '작성/수정 시각' : 'Written/Updated'}</dt>
+      <dd class="mt-1 text-[hsl(var(--text-secondary))]">{data.pubDate.toLocaleString(lang)} / {data.updatedDate ? data.updatedDate.toLocaleString(lang) : '-'}</dd>
+    </div>
+    <div>
+      <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[hsl(var(--text-muted))]">{lang === 'ko' ? '검증 상태' : 'Verification status'}</dt>
+      <dd class="mt-1 text-[hsl(var(--text-secondary))]">{verificationMap[data.verificationStatus]}</dd>
+    </div>
+  </dl>
+  {
+    data.sources && data.sources.length > 0 && (
+      <ul class="mt-3 list-disc pl-5 text-xs text-[hsl(var(--text-muted))]">
+        {data.sources.slice(0, 3).map((source) => <li><a href={source} target="_blank" rel="noreferrer">{source}</a></li>)}
+      </ul>
+    )
+  }
+</section>

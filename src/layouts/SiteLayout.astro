@@ -1,7 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import ThemeToggle from '../components/react/ThemeToggle';
-import { COPY, type Lang } from '../consts';
+import { BRAND, COPY, type Lang } from '../consts';
 
 interface Props {
   lang: Lang;
@@ -24,7 +24,8 @@ const copy = COPY[lang];
     <header class="site-header border-b border-[hsl(var(--border))] bg-[hsl(var(--surface))]">
       <div class="container flex flex-wrap items-center justify-between gap-2 py-3 md:py-4">
         <div class="flex min-w-0 items-center gap-3 md:gap-6">
-          <a href={`/${lang}/`} class="truncate text-sm font-semibold text-[hsl(var(--text))] md:text-base">Arcane Markets</a>
+          <a href={`/${lang}/`} class="truncate text-sm font-semibold text-[hsl(var(--text))] md:text-base">{BRAND.name}</a>
+          <span class="hidden text-xs text-[hsl(var(--text-muted))] xl:inline">{BRAND.slogan}</span>
           <nav aria-label={lang === 'ko' ? '주요 메뉴' : 'Primary'} class="hidden md:block">
             <a class="text-sm font-medium text-[hsl(var(--text-secondary))] hover:text-[hsl(var(--text-primary))]" href={`/${lang}/blog/`}>
               {lang === 'ko' ? '인사이트' : 'Insights'}
@@ -47,6 +48,7 @@ const copy = COPY[lang];
           <a href={`/${lang}/#methodology`} class="hover:underline">{copy.methodology}</a>
           <a href={`/${lang}/#legal`} class="hover:underline">{copy.legal}</a>
           <a href={`/${lang}/#contact`} class="hover:underline">{copy.contact}</a>
+          <a href={`/${lang}/corrections/`} class="hover:underline">{copy.corrections}</a>
         </nav>
       </div>
     </footer>

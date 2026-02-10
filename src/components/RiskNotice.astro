@@ -1,0 +1,15 @@
+---
+import { COPY, type Lang } from '../consts';
+
+interface Props {
+  lang: Lang;
+  position?: 'top' | 'bottom';
+}
+
+const { lang, position = 'top' } = Astro.props;
+const copy = COPY[lang];
+---
+
+<section class={`risk-notice card ${position === 'top' ? 'mb-4' : 'mt-8'} p-3`} role="note" aria-label={lang === 'ko' ? '투자 리스크 고지' : 'Investment risk notice'}>
+  <p class="text-xs font-medium text-[hsl(var(--text-secondary))]">⚠ {copy.riskNotice}</p>
+</section>
